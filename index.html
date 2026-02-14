@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Special For You ❤️</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 100px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#noBtn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+#yesBtn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.small {
+  transform: scale(0.7);
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="content">
+  <h1>Hello HER_NAME ❤️</h1>
+  <h2>Welcome to the Love Question Portal 💘</h2>
+  <p>Question 1: Do you think I am cute? 😎</p>
+  <button id="yesBtn" onclick="nextQuestion()">Yes 😍</button>
+  <button id="noBtn" onclick="shrinkNo()">No ❌</button>
+</div>
+
+<script>
+
+let questionNumber = 1;
+
+function shrinkNo() {
+  let noBtn = document.getElementById("noBtn");
+  noBtn.classList.add("small");
+  alert("Click carefully 😜 That option is risky!");
+}
+
+function nextQuestion() {
+  questionNumber++;
+
+  if(questionNumber === 2){
+    document.getElementById("content").innerHTML = `
+      <h2>Question 2: Will you always stay with me? ❤️</h2>
+      <button id="yesBtn" onclick="nextQuestion()">Of course 💕</button>
+      <button id="noBtn" onclick="shrinkNo()">Maybe ❌</button>
+    `;
+  }
+
+  else if(questionNumber === 3){
+    document.getElementById("content").innerHTML = `
+      <h2>Final Question 💍</h2>
+      <h3>Will you be my forever Valentine? ❤️</h3>
+      <button id="yesBtn" onclick="celebrate()">YESSSS 😍</button>
+      <button id="noBtn" onclick="shrinkNo()">No 😶</button>
+    `;
+  }
+}
+
+function celebrate() {
+  document.body.style.background = "#000";
+  document.getElementById("content").innerHTML = `
+    <h1 style="color:white;">Happy Valentine's Day Chinnu ❤️</h1>
+    <h2 style="color:white;">Sending You a Big Virtual Hug 🤗</h2>
+    <div style="font-size:100px;">🫂</div>
+    <h3 style="color:white;">Forever Yours 💕</h3>
+  `;
+
+  // Fireworks
+  var duration = 5 * 1000;
+  var end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 5,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
+}
+
+</script>
+
+</body>
+</html>

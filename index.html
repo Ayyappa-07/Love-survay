@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Special For You ❤️</title>
+<title>For Pooja ❤️</title>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
@@ -10,13 +10,8 @@ body {
   text-align: center;
   font-family: Arial, sans-serif;
   background: linear-gradient(to right, #ff9a9e, #fad0c4);
-  height: 100vh;
   margin: 0;
-  overflow: hidden;
-}
-
-.container {
-  margin-top: 100px;
+  padding-top: 80px;
 }
 
 button {
@@ -29,72 +24,132 @@ button {
   transition: 0.3s;
 }
 
-#noBtn {
-  background-color: #ff4d4d;
-  color: white;
+.correct {
+  color: green;
+  font-weight: bold;
 }
 
-#yesBtn {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.small {
-  transform: scale(0.7);
+.warning {
+  color: red;
+  font-weight: bold;
 }
 </style>
 </head>
+
 <body>
 
-<div class="container" id="content">
-  <h1>Hello HER_NAME ❤️</h1>
-  <h2>Welcome to the Love Question Portal 💘</h2>
-  <p>Question 1: Do you think I am cute? 😎</p>
-  <button id="yesBtn" onclick="nextQuestion()">Yes 😍</button>
-  <button id="noBtn" onclick="shrinkNo()">No ❌</button>
+<div id="content">
+  <h1>Hello Pooja ❤️</h1>
+  <h2>Question 1</h2>
+  <p>Do you think I am cute? 😎</p>
+  <button onclick="correctAnswer()">Yes 😍</button>
+  <button id="noBtn" onclick="moveNo()">No ❌</button>
+  <p id="message"></p>
 </div>
 
 <script>
 
-let questionNumber = 1;
+let moveSide = true;
 
-function shrinkNo() {
-  let noBtn = document.getElementById("noBtn");
-  noBtn.classList.add("small");
-  alert("Click carefully 😜 That option is risky!");
+function moveNo() {
+  let btn = document.getElementById("noBtn");
+  btn.style.position = "relative";
+
+  if (moveSide) {
+    btn.style.left = "100px";
+  } else {
+    btn.style.left = "-100px";
+  }
+
+  moveSide = !moveSide;
+
+  document.getElementById("message").innerHTML =
+    "<span class='warning'>Think carefully 😈 I will kill you 😂</span>";
 }
 
-function nextQuestion() {
-  questionNumber++;
+function correctAnswer() {
+  document.getElementById("message").innerHTML =
+    "<span class='correct'>Correct answer 😎 I knew you love me!</span>";
 
-  if(questionNumber === 2){
-    document.getElementById("content").innerHTML = `
-      <h2>Question 2: Will you always stay with me? ❤️</h2>
-      <button id="yesBtn" onclick="nextQuestion()">Of course 💕</button>
-      <button id="noBtn" onclick="shrinkNo()">Maybe ❌</button>
-    `;
-  }
+  setTimeout(question2, 1500);
+}
 
-  else if(questionNumber === 3){
-    document.getElementById("content").innerHTML = `
-      <h2>Final Question 💍</h2>
-      <h3>Will you be my forever Valentine? ❤️</h3>
-      <button id="yesBtn" onclick="celebrate()">YESSSS 😍</button>
-      <button id="noBtn" onclick="shrinkNo()">No 😶</button>
-    `;
-  }
+function question2() {
+  document.getElementById("content").innerHTML = `
+    <h2>Question 2</h2>
+    <p>When did I first fall for you? 💘</p>
+    <button onclick="wrong()">Jan 1</button>
+    <button onclick="wrong()">March 10</button>
+    <button onclick="correct2()">Feb 14 ❤️</button>
+    <button onclick="wrong()">April 2</button>
+    <p id="message"></p>
+  `;
+}
+
+function correct2() {
+  document.getElementById("message").innerHTML =
+    "<span class='correct'>Awww you remember our special day 🥰</span>";
+  setTimeout(question3, 1500);
+}
+
+function question3() {
+  document.getElementById("content").innerHTML = `
+    <h2>Question 3</h2>
+    <p>What gift did I buy on our first meet? 🎁</p>
+    <button onclick="wrong()">Chocolate</button>
+    <button onclick="correct3()">Teddy 🧸</button>
+    <button onclick="wrong()">Flowers</button>
+    <button onclick="wrong()">Ring</button>
+    <p id="message"></p>
+  `;
+}
+
+function correct3() {
+  document.getElementById("message").innerHTML =
+    "<span class='correct'>Yes! My cute teddy lover 😍</span>";
+  setTimeout(question4, 1500);
+}
+
+function question4() {
+  document.getElementById("content").innerHTML = `
+    <h2>Question 4</h2>
+    <p>Will you always stay with me? ❤️</p>
+    <button onclick="correct4()">Yes 💕</button>
+    <button onclick="wrong()">No 😶</button>
+    <p id="message"></p>
+  `;
+}
+
+function correct4() {
+  document.getElementById("message").innerHTML =
+    "<span class='correct'>That means the world to me ❤️</span>";
+  setTimeout(question5, 1500);
+}
+
+function question5() {
+  document.getElementById("content").innerHTML = `
+    <h2>Final Question 💍</h2>
+    <p>Will you be my forever Valentine? ❤️</p>
+    <button onclick="celebrate()">YESSSS 😍</button>
+    <button onclick="wrong()">No 😜</button>
+    <p id="message"></p>
+  `;
+}
+
+function wrong() {
+  document.getElementById("message").innerHTML =
+    "<span class='warning'>Think carefully 😈 I will kill you 😂</span>";
 }
 
 function celebrate() {
   document.body.style.background = "#000";
   document.getElementById("content").innerHTML = `
-    <h1 style="color:white;">Happy Valentine's Day Chinnu ❤️</h1>
-    <h2 style="color:white;">Sending You a Big Virtual Hug 🤗</h2>
-    <div style="font-size:100px;">🫂</div>
+    <h1 style="color:white;">Happy Valentine's Day Pooja ❤️</h1>
+    <h2 style="color:white;">Sending You The Biggest Hug 🤗</h2>
+    <img src="https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" width="300">
     <h3 style="color:white;">Forever Yours 💕</h3>
   `;
 
-  // Fireworks
   var duration = 5 * 1000;
   var end = Date.now() + duration;
 
